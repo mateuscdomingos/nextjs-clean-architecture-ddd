@@ -42,7 +42,7 @@ describe('UserMenu Component', () => {
     id: 'user-1',
     name: 'Mateus Domingos',
     email: 'mateus@test.com',
-    image: 'https://github.com/mateus.png',
+    image: 'https://avatars.githubusercontent.com/u/29188043',
   };
 
   const mockT = (key: string) => `translated_${key}`;

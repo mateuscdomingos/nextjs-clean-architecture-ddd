@@ -3,7 +3,7 @@ const mockSession = {
     id: 'user-id',
     name: 'Mateus Domingos',
     email: 'mateus@test.com',
-    image: 'https://github.com/mateus.png',
+    image: 'https://avatars.githubusercontent.com/u/29188043',
   },
 };
 

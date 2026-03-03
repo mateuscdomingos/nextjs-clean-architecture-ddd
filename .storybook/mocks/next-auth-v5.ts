@@ -4,7 +4,7 @@ export const auth = async () => {
       id: 'user-id',
       name: 'Mateus Domingos',
       email: 'mateus@test.com',
-      image: 'https://github.com/mateus.png',
+      image: 'https://avatars.githubusercontent.com/u/29188043',
     },
     expires: new Date(Date.now() + 3600 * 1000).toISOString(),
   };
