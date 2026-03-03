@@ -23,7 +23,7 @@ export default async function StoresPage() {
         <H1>{t('title')}</H1>
         <AddButton href="/stores/new" title={t('addNewStore')} />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {stores.map((store) => (
           <StoreCard key={store.props.id} store={{ ...store.props }} />
         ))}

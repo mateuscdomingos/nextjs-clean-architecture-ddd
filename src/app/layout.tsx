@@ -37,7 +37,7 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Header />
-          <main className="max-w-7xl mx-auto px-4 p-6">{children}</main>
+          <main className="container mx-auto px-4 p-6">{children}</main>
         </NextIntlClientProvider>
         <Toaster position="top-center" />
       </body>

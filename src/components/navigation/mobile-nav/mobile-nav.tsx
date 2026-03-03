@@ -44,7 +44,7 @@ export function MobileNav({ isAuthenticated }: { isAuthenticated: boolean }) {
           </SheetTitle>
         </div>
 
-        <SheetDescription asChild className="sr-only">
+        <SheetDescription asChild className="text-primary">
           <div className="px-3 py-6">
             <nav className="flex flex-col gap-1">
               <Link
