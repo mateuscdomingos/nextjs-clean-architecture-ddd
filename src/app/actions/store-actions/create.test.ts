@@ -8,12 +8,18 @@ jest.mock('@/auth', () => ({
   auth: jest.fn(),
 }));
 
+jest.mock('next/cache', () => ({
+  revalidatePath: jest.fn(),
+}));
+
 jest.mock('@/infra/factories/CreateStoreUseCaseFactory', () => ({
   CreateStoreUseCaseFactory: {
     makeCreateStoreUseCase: jest.fn(),
     makeLogger: jest.fn(() => ({ error: jest.fn() })),
   },
 }));
+
+import { revalidatePath } from 'next/cache';
 
 describe('handleCreateStore Server Action', () => {
   let mockExecute: jest.Mock;
@@ -42,6 +48,7 @@ describe('handleCreateStore Server Action', () => {
   it('should return success on success', async () => {
     const result = await handleCreateStore(undefined, validFormData);
 
+    expect(revalidatePath).toHaveBeenCalledWith('/stores');
     expect(result).toEqual({ success: true });
     expect(mockExecute).toHaveBeenCalledWith({
       name: 'New Store',

@@ -3,6 +3,7 @@
 import { auth } from '@/auth';
 import { CreateStoreUseCaseFactory } from '@/infra/factories/CreateStoreUseCaseFactory';
 import { newStoreSchema } from '@/lib/schemas/store';
+import { revalidatePath } from 'next/cache';
 
 export async function handleCreateStore(_: unknown, formData: FormData) {
   const session = await auth();
@@ -41,5 +42,6 @@ export async function handleCreateStore(_: unknown, formData: FormData) {
     return { error: { generic: 'Unknown error' } };
   }
 
+  revalidatePath('/stores');
   return { success: true };
 }
