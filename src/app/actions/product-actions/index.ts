@@ -1,0 +1,1 @@
+export { handleCreateProduct } from './create';
