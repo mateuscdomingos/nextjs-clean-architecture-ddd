@@ -58,7 +58,7 @@ describe('LoginForm', () => {
     jest
       .spyOn(React, 'useActionState')
       .mockReturnValue([
-        { error: { generic: 'Invalid fields. Please check your data.' } },
+        { error: { generic: 'invalidCredentials' } },
         jest.fn(),
         false,
       ]);

@@ -38,7 +38,7 @@ export function LoginForm() {
   };
 
   const getGenericMessageError = (genericErrorMessage: string) => {
-    if (genericErrorMessage === 'Invalid fields. Please check your data.') {
+    if (genericErrorMessage === 'invalidCredentials') {
       return t('invalidCredentials');
     }
 
