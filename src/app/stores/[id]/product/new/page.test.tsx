@@ -5,6 +5,9 @@ jest.mock('next/navigation', () => ({
   useParams: () => ({
     id: 'store-id',
   }),
+  useRouter: () => ({
+    push: jest.fn(),
+  }),
 }));
 
 jest.mock('@/app/actions/product-actions', () => ({
