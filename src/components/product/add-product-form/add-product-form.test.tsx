@@ -1,6 +1,6 @@
 import { AddProductForm } from './add-product-form';
 import React from 'react';
-import { render, screen, waitFor, within } from '@/test/test-utils';
+import { render, screen, waitFor } from '@/test/test-utils';
 import userEvent from '@testing-library/user-event';
 import { handleCreateProduct } from '@/app/actions/product-actions';
 import { toast } from 'sonner';

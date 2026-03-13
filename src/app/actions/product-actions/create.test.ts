@@ -81,8 +81,7 @@ describe('handleCreateProduct Server Action', () => {
     });
 
     it('should return error if Store ID is missing', async () => {
-      const { storeId, ...dataWithoutStoreId } = validProductData;
-      const invalidFormData = createFormData(dataWithoutStoreId);
+      const invalidFormData = createFormData(validProductData);
 
       const result = await handleCreateProduct(undefined, invalidFormData);
 
