@@ -25,7 +25,7 @@ export async function generateMetadata() {
       default: t('defaultTitle'),
     },
     description: t('description'),
-};
+  };
 }
 
 export default async function RootLayout({
