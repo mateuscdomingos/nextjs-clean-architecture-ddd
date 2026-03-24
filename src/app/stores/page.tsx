@@ -7,6 +7,14 @@ import { StoreUseCaseFactory } from '@/infra/factories/StoreUseCaseFactory';
 import { getTranslations } from 'next-intl/server';
 import { redirect } from 'next/navigation';
 
+export async function generateMetadata() {
+  const t = await getTranslations('storesPage');
+
+  return {
+    title: t('title'),
+  };
+}
+
 export default async function StoresPage() {
   const t = await getTranslations('storesPage');
   const session = await auth();

@@ -3,6 +3,14 @@ import { LoginForm } from '@/components/auth/login-form';
 import { H1 } from '@/components/ui/h1';
 import { getTranslations } from 'next-intl/server';
 
+export async function generateMetadata() {
+  const t = await getTranslations('loginPage');
+
+  return {
+    title: t('title'),
+  };
+}
+
 export default async function LoginPage() {
   const t = await getTranslations('loginPage');
 

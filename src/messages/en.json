@@ -38,6 +38,11 @@
     "description": "Enter your email below to login to your account.",
     "title": "Login"
   },
+  "metadata": {
+    "siteName": "Coffee Stock",
+    "defaultTitle": "Coffee Stock - Clean Arch Management",
+    "description": "Inventory management with DDD and Clean Architecture"
+  },
   "newProductPage": {
     "description": "Enter Product information below to create a new Product.",
     "inventory": "Inventory",

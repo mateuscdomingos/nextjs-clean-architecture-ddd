@@ -3,6 +3,14 @@ import { RegisterForm } from '@/components/auth/register-form';
 import { H1 } from '@/components/ui/h1';
 import { getTranslations } from 'next-intl/server';
 
+export async function generateMetadata() {
+  const t = await getTranslations('registerPage');
+
+  return {
+    title: t('title'),
+  };
+}
+
 export default async function RegisterPage() {
   const t = await getTranslations('registerPage');
 

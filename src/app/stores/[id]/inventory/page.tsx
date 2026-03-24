@@ -4,6 +4,14 @@ import { InventoryTable } from '@/components/inventory/table';
 import { GetProductByStoreIdUseCaseFactory } from '@/infra/factories/GetProductByStoreIdUseCaseFactory';
 import { Breadcrumb } from '@/components/navigation/breadcrumb';
 
+export async function generateMetadata() {
+  const t = await getTranslations('inventoryPage');
+
+  return {
+    title: t('title'),
+  };
+}
+
 export default async function InventoryPage(props: {
   params: Promise<{ id: string }>;
 }) {

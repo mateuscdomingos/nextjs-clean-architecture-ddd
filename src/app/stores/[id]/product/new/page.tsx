@@ -4,6 +4,14 @@ import { AddProductForm } from '@/components/product/add-product-form';
 import { H1 } from '@/components/ui/h1';
 import { getTranslations } from 'next-intl/server';
 
+export async function generateMetadata() {
+  const t = await getTranslations('newProductPage');
+
+  return {
+    title: t('title'),
+  };
+}
+
 export default async function NewProductPage(props: {
   params: Promise<{ id: string }>;
 }) {

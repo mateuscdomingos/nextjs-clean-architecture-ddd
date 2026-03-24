@@ -39,6 +39,11 @@
     "description": "Insira seu e-mail abaixo para acessar sua conta.",
     "title": "Conecte-se"
   },
+  "metadata": {
+    "siteName": "Coffee Stock",
+    "defaultTitle": "Coffee Stock - Gestão com Arquitetura Limpa",
+    "description": "Gestão de inventário com DDD e Clean Architecture"
+  },
   "newProductPage": {
     "description": "Insira as informações do Produto abaixo para criar um novo Produto.",
     "inventory": "Inventário",
