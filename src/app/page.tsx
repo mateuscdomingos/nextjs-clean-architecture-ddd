@@ -13,7 +13,6 @@ import {
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* 1. Hero Section - Primary Background */}
       <section className="py-24 px-6 text-center space-y-6 bg-background">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-6xl font-extrabold tracking-tighter mb-4">
@@ -27,13 +26,13 @@ export default function Home() {
           <div className="flex justify-center gap-4 mt-10">
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-bold hover:scale-105 transition-transform"
+              className="inline-flex items-center gap-2 md:px-8 md:py-4 px-6 py-3 bg-primary text-primary-foreground rounded-full font-bold hover:scale-105 transition-transform"
             >
               Get Started <ArrowRight size={18} />
             </Link>
             <Link
-              href="https://github.com/your-username/nextjs-clean-architecture-ddd"
-              className="inline-flex items-center gap-2 px-8 py-4 border rounded-full font-bold hover:bg-muted transition-colors"
+              href="https://github.com/mateuscdomingos/nextjs-clean-architecture-ddd"
+              className="inline-flex items-center gap-2 md:px-8 md:py-4 px-6 py-3 border rounded-full font-bold hover:bg-muted transition-colors"
             >
               <Github size={20} /> GitHub
             </Link>
@@ -41,7 +40,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. Motivation Section - Muted Background */}
       <section className="py-20 px-6 bg-muted/50 border-y">
         <div className="max-w-5xl mx-auto items-center">
           <h2 className="text-3xl text-center font-bold mb-12">
@@ -58,7 +56,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. Folder Structure - Card Background */}
       <section className="py-20 px-6 bg-background">
         <div className="max-w-5xl mx-auto space-y-10">
           <div className="text-center">
@@ -67,7 +64,7 @@ export default function Home() {
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-zinc-950 p-6 rounded-xl font-mono text-sm text-zinc-300 shadow-2xl border border-zinc-800">
+            <div className="bg-zinc-950 p-6 rounded-xl font-mono md:text-sm text-xs text-zinc-300 shadow-2xl border border-zinc-800">
               <ul className="space-y-1">
                 <li>📂 src</li>
                 <li>
@@ -160,7 +157,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. Tech Stack - Muted Background */}
       <section className="py-20 px-6 bg-muted/50 border-y">
         <div className="max-w-5xl mx-auto space-y-12">
           <h2 className="text-3xl font-bold text-center flex items-center justify-center gap-3">
@@ -176,7 +172,7 @@ export default function Home() {
               { title: 'Next-Auth (v5)', desc: 'Secure Server-side Auth' },
               { title: 'Shadcn UI', desc: 'Radix UI & Tailwind CSS' },
               { title: 'React Hook Form', desc: 'Validated with Zod' },
-              { title: 'Jest & RTL', desc: 'TDD / Integration Testing' },
+              { title: 'Jest & RTL', desc: 'Unit tests' },
               { title: 'i18n', desc: 'Dynamic translations (next-intl)' },
               { title: 'Storybook', desc: 'Component Isolation & Docs' },
             ].map((tech) => (
@@ -194,20 +190,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. CI/CD Pipeline - Background Primary-Muted Gradient */}
       <section className="py-24 px-6 bg-background">
         <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-extrabold tracking-tight">
+              CI/CD Pipeline
+            </h2>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              A robust automation workflow using GitHub Actions to ensure code
+              stability and immutable deployments.
+            </p>
+          </div>
           <div className="flex flex-col md:flex-row gap-12 items-start">
-            <div className="md:w-1/3">
-              <h2 className="text-4xl font-extrabold tracking-tight">
-                CI/CD Pipeline
-              </h2>
-              <p className="mt-4 text-muted-foreground leading-relaxed">
-                A robust automation workflow using GitHub Actions to ensure code
-                stability and immutable deployments.
-              </p>
-            </div>
-            <div className="md:w-2/3 space-y-6">
+            <div className="space-y-6 grid md:grid-cols-2 gap-2">
               {[
                 {
                   title: 'Setup & Cache',
@@ -237,7 +232,7 @@ export default function Home() {
               ].map((step, index) => (
                 <div
                   key={index}
-                  className="flex gap-6 p-4 rounded-lg hover:bg-muted/50 transition-colors border border-transparent hover:border-border"
+                  className="flex gap-6 p-4 rounded-lg hover:bg-muted/50 transition-colors border border-transparent hover:border-border mb-2"
                 >
                   <div className="bg-primary text-primary-foreground h-10 w-10 rounded-full flex items-center justify-center shrink-0">
                     {step.icon}
@@ -253,7 +248,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. Footer / About Me - Muted Background */}
       <footer className="py-20 px-6 bg-muted border-t text-center">
         <div className="max-w-2xl mx-auto space-y-6">
           <p className="text-muted-foreground leading-relaxed">
@@ -263,13 +257,13 @@ export default function Home() {
           </p>
           <div className="flex justify-center gap-8">
             <Link
-              href="https://linkedin.com/in/yourprofile"
+              href="https://www.linkedin.com/in/mateus-cd"
               className="font-bold hover:text-primary transition"
             >
               LinkedIn
             </Link>
             <Link
-              href="https://github.com/your-username"
+              href="https://github.com/mateuscdomingos"
               className="font-bold hover:text-primary transition"
             >
               GitHub
