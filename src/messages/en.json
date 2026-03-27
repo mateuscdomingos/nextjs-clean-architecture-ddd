@@ -1,4 +1,87 @@
 {
+  "homePage": {
+    "main": {
+      "subtitle": "A simple inventory ecosystem designed to showcase <strong>Clean Architecture</strong>, <strong>DDD</strong>, and <strong>Type-Safe</strong> development with Next.js 16.",
+      "getStarted": "Get Started"
+    },
+    "motivation": {
+      "title": "Motivation & Study Goals",
+      "description": "This project started as a deep dive into decoupled software design. The goal was to build a scalable React application where the business logic (Core) remains agnostic of the framework (Next.js) or database (Prisma/Postgres). It serves as a laboratory for implementing DDD principles, boundary separation, and Type-Safe development."
+    },
+    "architecture": {
+      "title": "Clean Architecture Folders",
+      "folders": {
+        "app": "// Next.js App Router (UI/Framework)",
+        "actions": "// Type-safe Server Actions",
+        "core": "// THE BRAIN (Zero Dependencies)",
+        "domain": "// Entities, Aggregates (DDD)",
+        "ports": "// Interfaces / Contracts",
+        "useCases": "// Pure Business Logic",
+        "infra": "// Repositories Impl & Factories",
+        "lib": "// Framework-specific Utils (Zod, Tailwind)",
+        "test": "// Testing Setup & Mocks"
+      },
+      "highlights": {
+        "core": "The heart. Agnostic to any database or UI framework. TypeScript at its purest form.",
+        "infra": "Implementation details. Prisma, External Services, and Factories are mapped here.",
+        "lib": "Cross-cutting concerns like Shadcn UI config, Zod schemas, and shared utilities."
+      }
+    },
+    "stack": {
+      "title": "Engineering Stack",
+      "items": {
+        "next": {
+          "title": "Next.js 15",
+          "desc": "React 19, Turbopack, App Router"
+        },
+        "prisma": {
+          "title": "Prisma Postgres",
+          "desc": "Type-safe Database Management"
+        },
+        "auth": {
+          "title": "Next-Auth (v5)",
+          "desc": "Secure Server-side Auth"
+        },
+        "ui": { "title": "Shadcn UI", "desc": "Radix UI & Tailwind CSS" },
+        "forms": { "title": "React Hook Form", "desc": "Validated with Zod" },
+        "tests": { "title": "Jest & RTL", "desc": "Unit tests" },
+        "i18n": { "title": "i18n", "desc": "Dynamic translations (next-intl)" },
+        "storybook": {
+          "title": "Storybook",
+          "desc": "Component Isolation & Docs"
+        }
+      }
+    },
+    "cicd": {
+      "title": "CI/CD Pipeline",
+      "description": "A robust automation workflow using GitHub Actions to ensure code stability and immutable deployments.",
+      "steps": {
+        "setup": {
+          "title": "Setup & Cache",
+          "desc": "Initializes environment and caches pnpm store for ultra-fast builds."
+        },
+        "qa": {
+          "title": "Quality Assurance",
+          "desc": "Runs ESLint and Prettier check. Any code style violation breaks the build."
+        },
+        "testing": {
+          "title": "Automated Testing",
+          "desc": "Executes Jest suite. High coverage ensures DDD business rules remain intact."
+        },
+        "build": {
+          "title": "Production Build",
+          "desc": "Validates Prisma schemas and Next.js compilation for a type-safe artifact."
+        },
+        "deploy": {
+          "title": "Vercel Deployment",
+          "desc": "Pre-built strategy: what passes in the CI is exactly what goes to production."
+        }
+      }
+    },
+    "footer": {
+      "about": "I am a Software Engineer focused on high-performance web applications and scalable architectures. This project represents my commitment to clean code and continuous learning."
+    }
+  },
   "inventoryPage": {
     "title": "Inventory",
     "description": "Manage your beans, supplies, and stock levels.",

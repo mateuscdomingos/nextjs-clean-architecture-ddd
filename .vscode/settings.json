@@ -5,7 +5,7 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["oklch", "Português", "vercel"],
+  "cSpell.words": ["CICD", "oklch", "Português", "vercel"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {

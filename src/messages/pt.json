@@ -1,4 +1,90 @@
 {
+  "homePage": {
+    "main": {
+      "subtitle": "Um ecossistema de inventário simples projetado para demonstrar <strong>Clean Architecture</strong>, <strong>DDD</strong> e <strong>Type-Safe</strong> com Next.js 16.",
+      "getStarted": "Começar Agora"
+    },
+    "motivation": {
+      "title": "Motivação e Objetivos de Estudo",
+      "description": "Este projeto começou como um mergulho profundo em design de software desacoplado. O objetivo foi construir uma aplicação React escalável onde a lógica de negócio (Core) permanece agnóstica ao framework (Next.js) ou banco de dados (Prisma/Postgres). Serve como um laboratório para implementar princípios DDD, separação de fronteiras e desenvolvimento tipado."
+    },
+    "architecture": {
+      "title": "Estrutura de Pastas (Clean Arch)",
+      "folders": {
+        "app": "// Next.js App Router (UI/Framework)",
+        "actions": "// Server Actions Tipadas",
+        "core": "// O CÉREBRO (Zero Dependências)",
+        "domain": "// Entidades, Agregados (DDD)",
+        "ports": "// Interfaces / Contratos",
+        "useCases": "// Lógica de Negócio Pura",
+        "infra": "// Implementação de Repositórios e Factories",
+        "lib": "// Utilitários do Framework (Zod, Tailwind)",
+        "test": "// Configuração de Testes e Mocks"
+      },
+      "highlights": {
+        "core": "O coração do projeto. Agnóstico a qualquer banco de dados ou framework de UI. TypeScript em sua forma pura.",
+        "infra": "Detalhes de implementação. Repositórios Prisma, serviços externos e factories são mapeados aqui.",
+        "lib": "Preocupações transversais como configurações do Shadcn UI, schemas Zod e utilitários compartilhados."
+      }
+    },
+    "stack": {
+      "title": "Stack de Engenharia",
+      "items": {
+        "next": {
+          "title": "Next.js 15",
+          "desc": "React 19, Turbopack, App Router"
+        },
+        "prisma": {
+          "title": "Prisma Postgres",
+          "desc": "Gestão de Banco de Dados Type-safe"
+        },
+        "auth": {
+          "title": "Next-Auth (v5)",
+          "desc": "Autenticação Segura Server-side"
+        },
+        "ui": { "title": "Shadcn UI", "desc": "Radix UI & Tailwind CSS" },
+        "forms": { "title": "React Hook Form", "desc": "Validado com Zod" },
+        "tests": {
+          "title": "Jest & RTL",
+          "desc": "Testes unitários"
+        },
+        "i18n": { "title": "i18n", "desc": "Traduções dinâmicas (next-intl)" },
+        "storybook": {
+          "title": "Storybook",
+          "desc": "Isolamento de Componentes e Docs"
+        }
+      }
+    },
+    "cicd": {
+      "title": "Pipeline de CI/CD",
+      "description": "Um fluxo de automação robusto usando GitHub Actions para garantir estabilidade do código e deploys imutáveis.",
+      "steps": {
+        "setup": {
+          "title": "Setup & Cache",
+          "desc": "Inicializa o ambiente e faz cache do pnpm store para builds ultra-rápidos."
+        },
+        "qa": {
+          "title": "Garantia de Qualidade (QA)",
+          "desc": "Executa verificações de ESLint e Prettier. Qualquer violação de estilo quebra o build."
+        },
+        "testing": {
+          "title": "Testes Automatizados",
+          "desc": "Executa a suíte do Jest. Alta cobertura garante que as regras de negócio do DDD permaneçam intactas."
+        },
+        "build": {
+          "title": "Build de Produção",
+          "desc": "Valida schemas do Prisma e a compilação do Next.js para um artefato type-safe."
+        },
+        "deploy": {
+          "title": "Deploy na Vercel",
+          "desc": "Estratégia de pre-built: o que passa no CI é exatamente o que vai para produção."
+        }
+      }
+    },
+    "footer": {
+      "about": "Sou um Engenheiro de Software focado em aplicações web de alta performance e arquiteturas escaláveis. Este projeto representa meu compromisso com código limpo e aprendizado contínuo."
+    }
+  },
   "cSpell:disable": true,
   "inventoryPage": {
     "title": "Inventário",
