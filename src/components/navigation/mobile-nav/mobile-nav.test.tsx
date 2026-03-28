@@ -6,6 +6,10 @@ jest.mock('../language-switcher', () => ({
   LanguageSwitcher: () => <div data-testid="language-switcher" />,
 }));
 
+jest.mock('../theme-switcher', () => ({
+  ThemeSwitcher: () => <div data-testid="theme-switcher" />,
+}));
+
 describe('MobileNav Component', () => {
   it('should render the menu trigger button', () => {
     render(<MobileNav isAuthenticated={false} />);
@@ -43,6 +47,16 @@ describe('MobileNav Component', () => {
 
     expect(screen.getByText('Preferences')).toBeInTheDocument();
     expect(screen.getByTestId('language-switcher')).toBeInTheDocument();
+  });
+
+  it('should render ThemeSwitcher and preferences label', async () => {
+    const user = userEvent.setup();
+    render(<MobileNav isAuthenticated={false} />);
+
+    await user.click(screen.getByRole('button'));
+
+    expect(screen.getByText('Preferences')).toBeInTheDocument();
+    expect(screen.getByTestId('theme-switcher')).toBeInTheDocument();
   });
 
   it('should close the drawer when a link is clicked', async () => {

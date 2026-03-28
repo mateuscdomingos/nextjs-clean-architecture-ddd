@@ -185,11 +185,15 @@
     },
     "navigation": {
       "createAccount": "Criar Conta",
+      "dark": "Escuro",
       "exit": "Sair",
+      "light": "Claro",
       "login": "Entrar",
       "myStores": "Minhas Lojas",
       "preferences": "Preferências",
-      "switchLanguage": "Alterar Idioma"
+      "system": "Sistema",
+      "switchLanguage": "Alterar Idioma",
+      "toggleTheme": "Alternar Tema"
     },
     "product": {
       "minStock": "Estoque Mín",

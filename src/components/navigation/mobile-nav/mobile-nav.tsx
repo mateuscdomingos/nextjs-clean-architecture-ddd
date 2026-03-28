@@ -20,6 +20,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { LanguageSwitcher } from '../language-switcher';
 import { useTranslations } from 'next-intl';
+import { ThemeSwitcher } from '../theme-switcher';
 
 export function MobileNav({ isAuthenticated }: { isAuthenticated: boolean }) {
   const t = useTranslations('components.navigation');
@@ -93,6 +94,7 @@ export function MobileNav({ isAuthenticated }: { isAuthenticated: boolean }) {
           <p className="text-[10px] font-bold uppercase tracking-widest mb-3">
             {t('preferences')}
           </p>
+          <ThemeSwitcher />
           <LanguageSwitcher />
         </div>
       </SheetContent>

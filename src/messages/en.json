@@ -181,11 +181,15 @@
     },
     "navigation": {
       "createAccount": "Create Account",
+      "dark": "Dark",
       "exit": "Exit",
+      "light": "Light",
       "login": "Login",
       "myStores": "My Stores",
       "preferences": "Preferences",
-      "switchLanguage": "Switch Language"
+      "system": "System",
+      "switchLanguage": "Switch Language",
+      "toggleTheme": "Toggle theme"
     },
     "product": {
       "minStock": "Min Stock",

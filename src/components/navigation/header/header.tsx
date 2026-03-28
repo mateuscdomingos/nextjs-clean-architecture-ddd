@@ -6,6 +6,7 @@ import { Store } from 'lucide-react';
 import { MobileNav } from '../mobile-nav';
 import { LanguageSwitcher } from '../language-switcher';
 import { getTranslations } from 'next-intl/server';
+import { ThemeSwitcher } from '../theme-switcher';
 
 export async function Header() {
   const t = await getTranslations('components.navigation');
@@ -28,6 +29,7 @@ export async function Header() {
 
         <div className="flex items-center gap-4">
           <div className="hidden md:block">
+            <ThemeSwitcher />
             <LanguageSwitcher />
           </div>
           <nav className="hidden md:flex items-center gap-4 mr-2">

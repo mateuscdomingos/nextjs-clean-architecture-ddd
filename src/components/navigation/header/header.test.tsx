@@ -22,6 +22,10 @@ jest.mock('../language-switcher', () => ({
   LanguageSwitcher: () => <div data-testid="language-switcher" />,
 }));
 
+jest.mock('../theme-switcher', () => ({
+  ThemeSwitcher: () => <div data-testid="theme-switcher" />,
+}));
+
 describe('Header Component', () => {
   describe('When user is unauthenticated', () => {
     beforeEach(() => {
@@ -110,5 +114,13 @@ describe('Header Component', () => {
     render(ResolvedHeader);
 
     expect(screen.getByTestId('language-switcher')).toBeInTheDocument();
+  });
+
+  it('should always render the ThemeSwitcher on desktop', async () => {
+    (auth as jest.Mock).mockResolvedValue(null);
+    const ResolvedHeader = await Header();
+    render(ResolvedHeader);
+
+    expect(screen.getByTestId('theme-switcher')).toBeInTheDocument();
   });
 });
