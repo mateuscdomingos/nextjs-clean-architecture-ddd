@@ -2,6 +2,14 @@ import { render, screen } from '@/test/test-utils';
 import { InventoryTable } from './table';
 import { ProductProps } from '@/core/domain/Product/product.types';
 
+jest.mock('next/navigation', () => ({
+  useParams: () => ({ id: 'store-1' }),
+}));
+
+jest.mock('@/app/actions/product-actions/update-stock', () => ({
+  handleUpdateStockQuantity: jest.fn(),
+}));
+
 describe('InventoryTable', () => {
   const mockData: ProductProps[] = [
     {
@@ -76,7 +84,19 @@ describe('InventoryTable', () => {
 
     const buttons = screen.getAllByRole('button');
     expect(buttons.length).toBe(4);
-    expect(buttons[0]).toHaveTextContent('-');
-    expect(buttons[1]).toHaveTextContent('+');
+  });
+
+  it('should disable decrement button if stock is zero', () => {
+    const zeroStockData: ProductProps[] = [
+      {
+        ...mockData[0],
+        stockQuantity: 0,
+      },
+    ];
+
+    render(<InventoryTable data={zeroStockData} />);
+
+    const buttons = screen.getAllByRole('button');
+    expect(buttons[0]).toBeDisabled();
   });
 });

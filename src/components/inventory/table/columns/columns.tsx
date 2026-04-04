@@ -4,8 +4,17 @@ import { ColumnDef } from '@tanstack/react-table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ProductProps } from '@/core/domain/Product/product.types';
+import { Minus, Plus } from 'lucide-react';
 
-export const columns: ColumnDef<ProductProps>[] = [
+interface ColumnProps {
+  onUpdateStock: (productId: string, type: 'increment' | 'decrement') => void;
+  isPending: boolean;
+}
+
+export const getColumns = ({
+  onUpdateStock,
+  isPending,
+}: ColumnProps): ColumnDef<ProductProps>[] => [
   {
     accessorKey: 'name',
     header: 'product',
@@ -42,7 +51,7 @@ export const columns: ColumnDef<ProductProps>[] = [
     accessorKey: 'priceInCents',
     header: 'price',
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue('priceInCents')) / 100;
+      const amount = (row.getValue('priceInCents') as number) / 100;
       return (
         <span>
           {new Intl.NumberFormat('pt-BR', {
@@ -56,14 +65,25 @@ export const columns: ColumnDef<ProductProps>[] = [
   {
     id: 'actions',
     header: 'actions',
-    cell: () => {
+    cell: ({ row }) => {
+      const product = row.original;
       return (
         <div className="flex gap-2">
-          <Button variant="outline" size="sm">
-            -
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={isPending || product.stockQuantity <= 0}
+            onClick={() => onUpdateStock(product.id, 'decrement')}
+          >
+            <Minus size={14} />
           </Button>
-          <Button variant="outline" size="sm">
-            +
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={isPending}
+            onClick={() => onUpdateStock(product.id, 'increment')}
+          >
+            <Plus size={14} />
           </Button>
         </div>
       );

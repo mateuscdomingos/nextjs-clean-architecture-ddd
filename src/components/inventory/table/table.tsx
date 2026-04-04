@@ -1,5 +1,7 @@
 'use client';
 
+import { useTransition, useMemo } from 'react';
+import { useParams } from 'next/navigation';
 import {
   flexRender,
   getCoreRowModel,
@@ -15,18 +17,9 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { useTranslations } from 'next-intl';
-import { columns } from './columns';
 import { ProductProps } from '@/core/domain/Product/product.types';
-
-export type Product = {
-  id: string;
-  name: string;
-  roast: 'light' | 'medium' | 'dark';
-  priceInCents: number;
-  minimumStockQuantity: number;
-  stockQuantity: number;
-  unit: string;
-};
+import { handleUpdateStockQuantity } from '@/app/actions/product-actions/update-stock';
+import { getColumns } from './columns';
 
 interface InventoryTableProps {
   data: ProductProps[];
@@ -34,9 +27,28 @@ interface InventoryTableProps {
 
 export function InventoryTable({ data }: InventoryTableProps) {
   const t = useTranslations('inventoryPage.table');
+  const params = useParams();
+  const storeId = params.id as string;
+  const [isPending, startTransition] = useTransition();
+
+  const handleUpdateStock = (
+    productId: string,
+    type: 'increment' | 'decrement',
+  ) => {
+    startTransition(async () => {
+      await handleUpdateStockQuantity({
+        productId,
+        storeId,
+        type,
+      });
+    });
+  };
+
+  const columns = getColumns({ onUpdateStock: handleUpdateStock, isPending });
+
   const table = useReactTable({
     data,
-    columns: columns,
+    columns,
     getCoreRowModel: getCoreRowModel(),
   });
 
@@ -53,7 +65,7 @@ export function InventoryTable({ data }: InventoryTableProps) {
                   | 'stock'
                   | 'price';
                 return (
-                  <TableHead key={headerName}>
+                  <TableHead key={header.id}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(t(headerName), header.getContext())}
@@ -66,10 +78,7 @@ export function InventoryTable({ data }: InventoryTableProps) {
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && 'selected'}
-              >
+              <TableRow key={row.id}>
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

@@ -42,13 +42,9 @@ describe('Breadcrumb', () => {
   it('should render the correct number of separators', () => {
     const { container } = render(<Breadcrumb items={mockItems} />);
 
-    // Se temos 3 itens, devemos ter 2 separadores
-    // O componente do Shadcn usa <li role="presentation"> para o separador ou um SVG
     const separators = container.querySelectorAll(
       '[data-slot="breadcrumb-separator"]',
     );
-    // Nota: A query exata depende de como o seu componente UI foi gerado,
-    // mas geralmente verificamos a ausência no último item.
     expect(separators.length).toBe(mockItems.length - 1);
   });
 });

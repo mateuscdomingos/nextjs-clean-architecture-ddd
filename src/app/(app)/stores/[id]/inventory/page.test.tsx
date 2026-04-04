@@ -8,6 +8,14 @@ jest.mock('@/infra/factories/GetProductByStoreIdUseCaseFactory', () => ({
   },
 }));
 
+jest.mock('next/navigation', () => ({
+  useParams: () => ({ id: 'store-uuid-123' }),
+}));
+
+jest.mock('@/app/actions/product-actions/update-stock', () => ({
+  handleUpdateStockQuantity: jest.fn(),
+}));
+
 describe('InventoryPage', () => {
   const mockStoreId = 'store-uuid-123';
   const props = {
@@ -23,6 +31,7 @@ describe('InventoryPage', () => {
         stockQuantity: 50,
         minimumStockQuantity: 10,
         unit: 'kg',
+        storeId: mockStoreId,
       },
     },
   ];
