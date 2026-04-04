@@ -22,6 +22,14 @@ export const updateStockQuantity = (
   return { ...product, stockQuantity: quantity };
 };
 
+export const incrementStock = (product: Product): Product => {
+  return updateStockQuantity(product, product.stockQuantity + 1);
+};
+
+export const decrementStock = (product: Product): Product => {
+  return updateStockQuantity(product, product.stockQuantity - 1);
+};
+
 export const updateMinimumStockQuantity = (
   product: Product,
   quantity: number,

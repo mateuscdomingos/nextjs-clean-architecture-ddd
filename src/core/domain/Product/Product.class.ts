@@ -18,6 +18,14 @@ export class Product {
     return new Product({ ...this.props, stockQuantity: quantity });
   }
 
+  incrementStock() {
+    return this.updateStockQuantity(this.props.stockQuantity + 1);
+  }
+
+  decrementStock() {
+    return this.updateStockQuantity(this.props.stockQuantity - 1);
+  }
+
   updateMinimumStockQuantity(quantity: number) {
     this.validateQuantity(quantity, 'minimumStockQuantity');
     return new Product({ ...this.props, minimumStockQuantity: quantity });

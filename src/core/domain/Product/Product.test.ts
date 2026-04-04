@@ -94,6 +94,52 @@ describe('Domain: Product', () => {
           '"stockQuantity" cannot be negative',
         );
       });
+
+      it('should increment stock quantity by 1', () => {
+        const product = new Product({
+          id: '1',
+          name: 'Coffee Beans',
+          priceInCents: 1599,
+          roast: 'light',
+          stockQuantity: 100,
+          minimumStockQuantity: 10,
+          unit: 'kg',
+          storeId: 'store-123',
+        });
+        const updated = product.incrementStock();
+        expect(updated.props.stockQuantity).toBe(101);
+      });
+
+      it('should decrement stock quantity by 1', () => {
+        const product = new Product({
+          id: '1',
+          name: 'Coffee Beans',
+          priceInCents: 1599,
+          roast: 'light',
+          stockQuantity: 100,
+          minimumStockQuantity: 10,
+          unit: 'kg',
+          storeId: 'store-123',
+        });
+        const updated = product.decrementStock();
+        expect(updated.props.stockQuantity).toBe(99);
+      });
+
+      it('should throw error when decrementing stock below zero', () => {
+        const product = new Product({
+          id: '1',
+          name: 'Coffee Beans',
+          priceInCents: 1599,
+          roast: 'light',
+          stockQuantity: 0,
+          minimumStockQuantity: 10,
+          unit: 'kg',
+          storeId: 'store-123',
+        });
+        expect(() => product.decrementStock()).toThrow(
+          '"stockQuantity" cannot be negative',
+        );
+      });
     });
 
     describe('updateMinimumStockQuantity', () => {
@@ -229,6 +275,58 @@ describe('Domain: Product', () => {
         const product = productFP.createProduct(productProps);
 
         expect(() => productFP.updateStockQuantity(product, -50)).toThrow(
+          '"stockQuantity" cannot be negative',
+        );
+      });
+
+      it('should increment stock quantity', () => {
+        const productProps: ProductProps = {
+          id: 'prod-123',
+          name: 'Espresso Beans',
+          priceInCents: 1599,
+          roast: 'light',
+          stockQuantity: 100,
+          minimumStockQuantity: 20,
+          unit: 'grams',
+          storeId: 'store-123',
+        };
+
+        const product = productFP.createProduct(productProps);
+        const updated = productFP.incrementStock(product);
+        expect(updated.stockQuantity).toBe(101);
+      });
+
+      it('should decrement stock quantity', () => {
+        const productProps: ProductProps = {
+          id: 'prod-123',
+          name: 'Espresso Beans',
+          priceInCents: 1599,
+          roast: 'light',
+          stockQuantity: 100,
+          minimumStockQuantity: 20,
+          unit: 'grams',
+          storeId: 'store-123',
+        };
+
+        const product = productFP.createProduct(productProps);
+        const updated = productFP.decrementStock(product);
+        expect(updated.stockQuantity).toBe(99);
+      });
+
+      it('should throw error if decrementing results in negative stock', () => {
+        const productProps: ProductProps = {
+          id: 'prod-123',
+          name: 'Espresso Beans',
+          priceInCents: 1599,
+          roast: 'light',
+          stockQuantity: 0,
+          minimumStockQuantity: 20,
+          unit: 'grams',
+          storeId: 'store-123',
+        };
+
+        const product = productFP.createProduct(productProps);
+        expect(() => productFP.decrementStock(product)).toThrow(
           '"stockQuantity" cannot be negative',
         );
       });
