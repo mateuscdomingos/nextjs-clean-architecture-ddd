@@ -25,7 +25,7 @@ import { handleCreateProduct } from '@/app/actions/product-actions';
 import { toast } from 'sonner';
 import { useParams, useRouter } from 'next/navigation';
 
-export function AddProductForm() {
+export function ProductForm() {
   const router = useRouter();
   const params = useParams();
   const storeId = params.id as string;

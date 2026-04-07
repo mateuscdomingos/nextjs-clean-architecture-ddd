@@ -1,4 +1,4 @@
-import { AddProductForm } from './add-product-form';
+import { ProductForm } from './add-product-form';
 import React from 'react';
 import { render, screen, waitFor } from '@/test/test-utils';
 import userEvent from '@testing-library/user-event';
@@ -26,13 +26,13 @@ jest.mock('@/app/actions/product-actions', () => ({
   handleCreateProduct: jest.fn(),
 }));
 
-describe('AddProductForm', () => {
+describe('ProductForm', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it('should render all coffee-specific input fields', () => {
-    render(<AddProductForm />);
+    render(<ProductForm />);
 
     expect(screen.getByRole('textbox', { name: 'Name' })).toBeInTheDocument();
     expect(screen.getByText('Roast Level')).toBeInTheDocument();
@@ -49,7 +49,7 @@ describe('AddProductForm', () => {
 
   describe('Validation', () => {
     it('should show validation error when name is too short', async () => {
-      render(<AddProductForm />);
+      render(<ProductForm />);
 
       const nameInput = screen.getByRole('textbox', { name: 'Name' });
       await userEvent.type(nameInput, 'ab');
@@ -73,7 +73,7 @@ describe('AddProductForm', () => {
         .spyOn(React, 'useActionState')
         .mockReturnValue([{ success: true }, jest.fn(), false]);
 
-      render(<AddProductForm />);
+      render(<ProductForm />);
 
       expect(toast.success).toHaveBeenCalledWith('Product Created');
       expect(mockPush).toHaveBeenCalledWith('/stores/store-123/inventory');
@@ -88,7 +88,7 @@ describe('AddProductForm', () => {
           false,
         ]);
 
-      render(<AddProductForm />);
+      render(<ProductForm />);
 
       expect(screen.getByText('Server validation failed')).toBeInTheDocument();
     });
@@ -96,7 +96,7 @@ describe('AddProductForm', () => {
 
   describe('Behavior & Data Mapping', () => {
     it('should submit correct FormData including storeId from params', async () => {
-      render(<AddProductForm />);
+      render(<ProductForm />);
 
       await userEvent.type(
         screen.getByRole('textbox', { name: 'Name' }),
