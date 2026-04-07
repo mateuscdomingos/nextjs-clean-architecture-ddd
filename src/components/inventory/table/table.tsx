@@ -1,6 +1,6 @@
 'use client';
 
-import { useTransition, useMemo } from 'react';
+import { useTransition } from 'react';
 import { useParams } from 'next/navigation';
 import {
   flexRender,

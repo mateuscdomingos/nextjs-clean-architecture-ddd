@@ -1,4 +1,3 @@
-import { Product } from '@/core/domain/Product/Product.class';
 import { ProductRepository } from '@/core/ports/repositories/ProductRepository';
 import { Logger } from '@/core/ports/services/Logger';
 import { ProductProps } from '@/core/domain/Product/product.types';
