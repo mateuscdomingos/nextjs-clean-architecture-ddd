@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
-import { AddProductForm } from './add-product-form';
+import { ProductForm } from './product-form';
 
 const meta = {
-  title: 'Components/Product/AddProductForm',
-  component: AddProductForm,
-} satisfies Meta<typeof AddProductForm>;
+  title: 'Components/Product/ProductForm',
+  component: ProductForm,
+} satisfies Meta<typeof ProductForm>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

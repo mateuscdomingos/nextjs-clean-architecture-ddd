@@ -1,1 +1,1 @@
-export { InventoryTable, type Product } from './table';
+export { InventoryTable } from './table';

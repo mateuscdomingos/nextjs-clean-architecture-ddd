@@ -1,6 +1,6 @@
 import { BaseCard } from '@/components/auth/base-card';
 import { Breadcrumb } from '@/components/navigation/breadcrumb';
-import { ProductForm } from '@/components/product/add-product-form';
+import { ProductForm } from '@/components/product/product-form';
 import { H1 } from '@/components/ui/h1';
 import { getTranslations } from 'next-intl/server';
 

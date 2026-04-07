@@ -1,4 +1,4 @@
-import { ProductForm } from './add-product-form';
+import { ProductForm } from './product-form';
 import React from 'react';
 import { render, screen, waitFor } from '@/test/test-utils';
 import userEvent from '@testing-library/user-event';
