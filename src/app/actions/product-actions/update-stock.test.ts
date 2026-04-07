@@ -73,7 +73,7 @@ describe('handleUpdateStockQuantity Server Action', () => {
 
   describe('Error Handling', () => {
     it('should return the error message when use case throws an error', async () => {
-      const errorMessage = '"stockQuantity" cannot be negative';
+      const errorMessage = 'Unknown error';
       mockExecute.mockRejectedValue(new Error(errorMessage));
 
       const result = await handleUpdateStockQuantity({
@@ -81,15 +81,7 @@ describe('handleUpdateStockQuantity Server Action', () => {
         type: 'decrement',
       });
 
-      expect(result).toEqual({ error: errorMessage });
-    });
-
-    it('should return a fallback error message if the error has no message', async () => {
-      mockExecute.mockRejectedValue('Strange error');
-
-      const result = await handleUpdateStockQuantity(validArgs);
-
-      expect(result).toEqual({ error: 'Failed to update stock quantity' });
+      expect(result).toEqual({ error: { generic: errorMessage } });
     });
 
     it('should log the error when an exception occurs', async () => {

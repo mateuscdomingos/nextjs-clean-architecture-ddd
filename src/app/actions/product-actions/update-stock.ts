@@ -34,7 +34,7 @@ export async function handleUpdateStockQuantity({
     revalidatePath(`/stores/${storeId}/inventory`);
 
     return { success: true };
-  } catch (error: any) {
+  } catch (error) {
     logger.error(
       handleUpdateStockQuantity.name,
       `Error updating stock for product ${productId}:`,
@@ -42,7 +42,7 @@ export async function handleUpdateStockQuantity({
     );
 
     return {
-      error: error.message || 'Failed to update stock quantity',
+      error: { generic: 'Unknown error' },
     };
   }
 }
