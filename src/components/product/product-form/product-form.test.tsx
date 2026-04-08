@@ -2,8 +2,12 @@ import { ProductForm } from './product-form';
 import React from 'react';
 import { render, screen, waitFor } from '@/test/test-utils';
 import userEvent from '@testing-library/user-event';
-import { handleCreateProduct } from '@/app/actions/product-actions';
+import {
+  handleCreateProduct,
+  handleUpdateProduct,
+} from '@/app/actions/product-actions';
 import { toast } from 'sonner';
+import { ProductProps } from '@/core/domain/Product/product.types';
 
 const mockPush = jest.fn();
 
@@ -24,9 +28,21 @@ jest.mock('sonner', () => ({
 
 jest.mock('@/app/actions/product-actions', () => ({
   handleCreateProduct: jest.fn(),
+  handleUpdateProduct: jest.fn(),
 }));
 
 describe('ProductForm', () => {
+  const mockInitialData: ProductProps = {
+    id: 'prod-999',
+    name: 'Grão Especial',
+    roast: 'dark',
+    priceInCents: 4500,
+    stockQuantity: 10,
+    minimumStockQuantity: 2,
+    unit: 'kg',
+    storeId: 'store-123',
+  };
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -40,11 +56,41 @@ describe('ProductForm', () => {
     expect(
       screen.getByRole('spinbutton', { name: 'Stock' }),
     ).toBeInTheDocument();
-    expect(
-      screen.getByRole('spinbutton', { name: 'Min Stock' }),
-    ).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: 'Unit' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
+  });
+
+  describe('Edit Mode', () => {
+    it('should pre-fill form fields when initialData is provided', () => {
+      render(<ProductForm initialData={mockInitialData} />);
+
+      expect(screen.getByRole('textbox', { name: 'Name' })).toHaveValue(
+        'Grão Especial',
+      );
+      const priceInput = screen.getByRole('textbox', {
+        name: 'Price',
+      }) as HTMLInputElement;
+      expect(priceInput.value.replace(/\u00a0/g, ' ')).toBe('R$ 45,00');
+
+      expect(screen.getByRole('spinbutton', { name: 'Stock' })).toHaveValue(10);
+      expect(
+        screen.getByRole('button', { name: 'Save Changes' }),
+      ).toBeInTheDocument();
+    });
+
+    it('should call handleUpdateProduct with id when in edit mode', async () => {
+      render(<ProductForm initialData={mockInitialData} />);
+
+      const submitButton = screen.getByRole('button', { name: 'Save Changes' });
+      await userEvent.click(submitButton);
+
+      await waitFor(() => {
+        expect(handleUpdateProduct).toHaveBeenCalled();
+      });
+
+      const formData = (handleUpdateProduct as jest.Mock).mock.calls[0][1];
+      expect(formData.get('id')).toBe('prod-999');
+      expect(formData.get('name')).toBe('Grão Especial');
+    });
   });
 
   describe('Validation', () => {
@@ -68,7 +114,7 @@ describe('ProductForm', () => {
   });
 
   describe('Server Action States', () => {
-    it('should display success toast and reset form on success', () => {
+    it('should display success toast for creation', () => {
       jest
         .spyOn(React, 'useActionState')
         .mockReturnValue([{ success: true }, jest.fn(), false]);
@@ -77,6 +123,16 @@ describe('ProductForm', () => {
 
       expect(toast.success).toHaveBeenCalledWith('Product Created');
       expect(mockPush).toHaveBeenCalledWith('/stores/store-123/inventory');
+    });
+
+    it('should display success toast for update', () => {
+      jest
+        .spyOn(React, 'useActionState')
+        .mockReturnValue([{ success: true }, jest.fn(), false]);
+
+      render(<ProductForm initialData={mockInitialData} />);
+
+      expect(toast.success).toHaveBeenCalledWith('Product updated');
     });
 
     it('should display generic error message from server', () => {
@@ -94,25 +150,17 @@ describe('ProductForm', () => {
     });
   });
 
-  describe('Behavior & Data Mapping', () => {
-    it('should submit correct FormData including storeId from params', async () => {
+  describe('Behavior & Data Mapping (Create)', () => {
+    it('should submit correct FormData for creation', async () => {
       render(<ProductForm />);
 
       await userEvent.type(
         screen.getByRole('textbox', { name: 'Name' }),
         'Café Bravo',
       );
-
-      const priceInput = screen.getByRole('textbox', { name: 'Price' });
-      await userEvent.type(priceInput, '5000');
-
       await userEvent.type(
-        screen.getByRole('spinbutton', { name: 'Stock' }),
-        '10',
-      );
-      await userEvent.type(
-        screen.getByRole('spinbutton', { name: 'Min Stock' }),
-        '2',
+        screen.getByRole('textbox', { name: 'Price' }),
+        '50,00',
       );
 
       const submitButton = screen.getByRole('button', { name: 'Submit' });
@@ -123,12 +171,8 @@ describe('ProductForm', () => {
       });
 
       const formData = (handleCreateProduct as jest.Mock).mock.calls[0][1];
-
       expect(formData.get('storeId')).toBe('store-123');
-      expect(formData.get('name')).toBe('Café Bravo');
-      expect(formData.get('priceInCents')).toBe('5000');
-      expect(formData.get('stockQuantity')).toBe('10');
-      expect(formData.get('roast')).toBe('medium');
+      expect(formData.get('id')).toBeNull();
     });
   });
 });

@@ -202,12 +202,14 @@
       "price": "Preço",
       "priceRequired": "Preço é obrigatório",
       "productCreated": "Produto criado",
+      "productUpdated": "Produto atualizado",
       "roastLevel": "Nível de Torra",
       "roastOptions": {
         "dark": "Escura",
         "light": "Clara",
         "medium": "Média"
       },
+      "saveChanges": "Salvar Mudanças",
       "stock": "Estoque Atual",
       "submit": "Enviar",
       "unit": "Unidade"

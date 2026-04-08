@@ -2,9 +2,10 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { ProductProps } from '@/core/domain/Product/product.types';
-import { Minus, Plus } from 'lucide-react';
+import { Edit, Minus, Plus } from 'lucide-react';
+import Link from 'next/link';
 
 interface ColumnProps {
   onUpdateStock: (productId: string, type: 'increment' | 'decrement') => void;
@@ -85,6 +86,15 @@ export const getColumns = ({
           >
             <Plus size={14} />
           </Button>
+          <Link
+            href={`/stores/${product.storeId}/product/${product.id}/edit`}
+            className={buttonVariants({
+              variant: 'outline',
+              size: 'sm',
+            })}
+          >
+            <Edit size={14} />
+          </Link>
         </div>
       );
     },

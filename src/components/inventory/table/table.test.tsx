@@ -79,11 +79,14 @@ describe('InventoryTable', () => {
     expect(screen.getByText('No products found.')).toBeInTheDocument();
   });
 
-  it('should render action buttons for each row', () => {
+  it('should render action buttons and link for each row', () => {
     render(<InventoryTable data={mockData} />);
 
     const buttons = screen.getAllByRole('button');
     expect(buttons.length).toBe(4);
+
+    const link = screen.getAllByRole('link')[0];
+    expect(link).toHaveAttribute('href', '/stores/store-1/product/1/edit');
   });
 
   it('should disable decrement button if stock is zero', () => {

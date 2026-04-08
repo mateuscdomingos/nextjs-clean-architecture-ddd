@@ -21,34 +21,50 @@ import {
 import { useTranslations } from 'next-intl';
 import { useActionState, useEffect } from 'react';
 import { formatCentsToCurrency, parseCurrencyToCents } from '@/lib/utils';
-import { handleCreateProduct } from '@/app/actions/product-actions';
+import {
+  handleCreateProduct,
+  handleUpdateProduct,
+} from '@/app/actions/product-actions';
 import { toast } from 'sonner';
 import { useParams, useRouter } from 'next/navigation';
+import { ProductProps } from '@/core/domain/Product/product.types';
 
-export function ProductForm() {
+interface ProductFormProps {
+  initialData?: ProductProps;
+}
+
+export function ProductForm({ initialData }: ProductFormProps) {
   const router = useRouter();
   const params = useParams();
   const storeId = params.id as string;
   const t = useTranslations('components.product');
+
+  const isEditing = !!initialData;
+
   const [state, formAction, isPending] = useActionState(
-    handleCreateProduct,
+    isEditing ? handleUpdateProduct : handleCreateProduct,
     undefined,
   );
 
   const form = useForm<ProductInput>({
     resolver: zodResolver(newProductSchema),
     defaultValues: {
-      name: '',
-      roast: 'medium',
-      priceInCents: 0,
-      stockQuantity: 0,
-      minimumStockQuantity: 0,
-      unit: 'un',
+      name: initialData?.name ?? '',
+      roast: initialData?.roast ?? 'medium',
+      priceInCents: initialData?.priceInCents ?? 0,
+      stockQuantity: initialData?.stockQuantity ?? 0,
+      minimumStockQuantity: initialData?.minimumStockQuantity ?? 0,
+      unit: initialData?.unit ?? 'un',
     },
   });
 
   const onSubmit = (data: ProductInput) => {
     const formData = new FormData();
+
+    if (isEditing) {
+      formData.append('id', initialData.id);
+    }
+
     formData.append('storeId', storeId);
     formData.append('name', data.name);
     formData.append('roast', data.roast);
@@ -65,11 +81,12 @@ export function ProductForm() {
 
   useEffect(() => {
     if (state?.success) {
-      toast.success(t('productCreated'));
+      toast.success(isEditing ? t('productUpdated') : t('productCreated'));
+
       router.push(`/stores/${storeId}/inventory`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, storeId]);
+  }, [state, storeId, isEditing]);
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -192,7 +209,7 @@ export function ProductForm() {
             </div>
           )}
           <Button type="submit" loading={isPending} className="w-full">
-            {t('submit')}
+            {isEditing ? t('saveChanges') : t('submit')}
           </Button>
         </Field>
       </FieldGroup>

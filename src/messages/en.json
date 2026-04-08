@@ -1,4 +1,11 @@
 {
+  "editProductPage": {
+    "description": "Enter Product information below to edit the Product",
+    "editProduct": "Edit Product",
+    "inventory": "Inventory",
+    "stores": "Stores",
+    "title": "Edit Product"
+  },
   "homePage": {
     "main": {
       "subtitle": "A simple inventory ecosystem designed to showcase <strong>Clean Architecture</strong>, <strong>DDD</strong>, and <strong>Type-Safe</strong> development with Next.js 16.",
@@ -198,12 +205,14 @@
       "price": "Price",
       "priceRequired": "Price is required",
       "productCreated": "Product Created",
+      "productUpdated": "Product updated",
       "roastLevel": "Roast Level",
       "roastOptions": {
         "dark": "Dark",
         "light": "Light",
         "medium": "Medium"
       },
+      "saveChanges": "Save Changes",
       "stock": "Stock",
       "submit": "Submit",
       "unit": "Unit"

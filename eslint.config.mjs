@@ -27,7 +27,14 @@ const eslintConfig = defineConfig([
           ],
         },
       ],
-
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
       ...prettierConfig.rules,
     },
   },
