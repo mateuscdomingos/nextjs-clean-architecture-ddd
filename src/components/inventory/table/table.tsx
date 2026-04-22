@@ -20,6 +20,7 @@ import { useTranslations } from 'next-intl';
 import { ProductProps } from '@/core/domain/Product/product.types';
 import { handleUpdateStockQuantity } from '@/app/actions/product-actions/update-stock';
 import { getColumns } from './columns';
+import { toast } from 'sonner';
 
 interface InventoryTableProps {
   data: ProductProps[];
@@ -36,11 +37,21 @@ export function InventoryTable({ data }: InventoryTableProps) {
     type: 'increment' | 'decrement',
   ) => {
     startTransition(async () => {
-      await handleUpdateStockQuantity({
+      const result = await handleUpdateStockQuantity({
         productId,
         storeId,
         type,
       });
+
+      if (result?.error) {
+        const errorMessage =
+          typeof result.error === 'string'
+            ? result.error
+            : result.error.generic;
+
+        toast.error(errorMessage);
+        return;
+      }
     });
   };
 
